@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coin Tap</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #f8e71c;
+        }
+        h1 {
+            color: #333;
+        }
+        #coin {
+            width: 100px;
+            height: 100px;
+            background-color: gold;
+            border-radius: 50%;
+            display: inline-block;
+            line-height: 100px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Coin Tap 💰</h1>
+    <p>Toca la moneda para ganar puntos</p>
+    <div id="coin">0</div>
+
+    <script>
+        let tg = window.Telegram.WebApp;
+        tg.expand(); // Expande la pantalla en Telegram
+
+        let coin = document.getElementById("coin");
+        let score = 0;
+
+        coin.addEventListener("click", function() {
+            score++;
+            coin.textContent = score;
+
+            if (score === 10) {
+                tg.showAlert("¡Has alcanzado 10 puntos! 🎉");
+            }
+        });
+    </script>
+</body>
+</html>
