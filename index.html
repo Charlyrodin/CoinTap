@@ -35,20 +35,36 @@
     <div id="coin">0</div>
 
     <script>
-        let tg = window.Telegram.WebApp;
-        tg.expand(); // Expande la pantalla en Telegram
-
+        let tg = window.Telegram.WebApp;  
+        tg.expand();  
+    
         let coin = document.getElementById("coin");
         let score = 0;
-
+    
         coin.addEventListener("click", function() {
             score++;
             coin.textContent = score;
-
+    
             if (score === 10) {
                 tg.showAlert("¡Has alcanzado 10 puntos! 🎉");
             }
         });
+    
+        function enviarPuntuacion() {
+            tg.sendData(JSON.stringify({ score: score }));  
+            tg.showAlert("¡Puntuación enviada a Telegram!");
+        }
+    
+        // Agregar botón para enviar puntuación
+        let boton = document.createElement("button");
+        boton.innerText = "Enviar Puntuación";
+        boton.style.display = "block";
+        boton.style.margin = "20px auto";
+        boton.style.padding = "10px";
+        boton.style.fontSize = "18px";
+        boton.addEventListener("click", enviarPuntuacion);
+        document.body.appendChild(boton);
     </script>
+    
 </body>
 </html>
